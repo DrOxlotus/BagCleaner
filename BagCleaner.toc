@@ -1,0 +1,9 @@
+## Interface: 80300
+## Version: 1.0
+## Title: BagCleaner
+## Notes: Keeps your inventory clear of junk and other unwanted items.
+## Author: Oxlotus/Lightsky/Smallbuttons
+## SavedVariables: BagCleanerAccountItemDB
+## SavedVariablesPerCharacter: BagCleanerCharacterItemDB
+
+Init.lua

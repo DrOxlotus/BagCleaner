@@ -1,0 +1,8 @@
+<Bindings>
+	<Binding name="BAGCLEANER_ADD_TO_ACCOUNT_LIST" header="BAGCLEANER" category="ADDONS">
+		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_ADD_TO_ACCOUNT_LIST"));
+	</Binding>
+	<Binding name="BAGCLEANER_ADD_TO_CHARACTER_LIST" category="ADDONS">
+		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST"));
+	</Binding>
+</Bindings>

@@ -22,7 +22,7 @@ if LOCALE == "deDE" then -- German
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
 	L["ADDON_NAME_SETTINGS"] 					= "|cff00ccff" .. addon .. "|r";
-	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
+	L["SETTINGS_AUTO_DELETE"]					= "Automatisches Löschen";
 	
 	-- GLOBAL STRINGS
 	
@@ -30,10 +30,10 @@ if LOCALE == "deDE" then -- German
 	
 	-- KEYBINDINGS
 	L["BAGCLEANER"]								= "BagCleaner"; -- This is the header for the keybindings menu.
-	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Add to Account List";
-	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Add to Character List";
-	L["BAGCLEANER_OPEN_IMPORT"]					= "Open Import";
-	L["BAGCLEANER_OPEN_SETTINGS"]				= "Open Settings";
+	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Zur Hauptliste hinzufügen";
+	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Zur Zeichen Spezifischen Liste Hinzufügen";
+	L["BAGCLEANER_OPEN_IMPORT"]					= "Import Öffnen";
+	L["BAGCLEANER_OPEN_SETTINGS"]				= "Einstellungen Öffnen";
 	
 	-- MODE NAMES
 	L["DEBUG_MODE"] 							= "Debug";

@@ -52,12 +52,13 @@ local function UpdateItemTooltip(tooltip)
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then
 			if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-				tooltip:AddLine(L["ADDON_NAME"] .. "This item will be sold or destroyed at the next merchant.");
+				tooltip:AddDoubleLine(L["ADDON_NAME"], "|TInterface\\Addons\\BagCleaner\\Assets\\sell:0|t |T", 0, 0, 0, 0, 0, 0);
 				tooltip:Show();
 			end
 		end
 	end
 end
+-- Icon by surang. https://www.flaticon.com/authors/surang
 
 local function SellOrDestroyItemToVendor(bag, slot, itemLink, itemCount)
 	local _, _, _, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(itemLink);

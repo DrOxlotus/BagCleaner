@@ -3,10 +3,18 @@ local addon, addonTbl = ...;
 
 -- Local Variables
 local L = addonTbl.L;
+local isSettingsFrameShown;
 
 local bcSettingsFrame = CreateFrame("Frame", "BagCleanerSettingsFrame", UIParent, "BasicFrameTemplateWithInset");
 
-local function OnShow()
+addonTbl.OnClose = function()
+	bcSettingsFrame:Hide();
+	isSettingsFrameShown = false;
+	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
+end
+-- Synopsis: Hide the frame when the player closes it.
+
+addonTbl.OnShow = function()
 	if bcSettingsFrame then
 		bcSettingsFrame:SetMovable(true);
 		bcSettingsFrame:EnableMouse(true);
@@ -65,7 +73,7 @@ local function OnShow()
 	-- Synopsis: The above two code blocks are what show and hide the mode descriptions when a player hoves over the dropdown.
 
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
-		OnClose();
+		addonTbl.OnClose();
 	end);
 	-- Synopsis: If the player clicks the red X in the upper right corner of the frame, then call the SettingsMenu_OnClose()
 	-- function so the frame can be properly hidden.

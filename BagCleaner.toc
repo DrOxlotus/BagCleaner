@@ -11,8 +11,8 @@ Locales\enGB.lua
 Locales\esES.lua
 Locales\deDE.lua
 Locales\ruRU.lua
-Handlers\CommandHandler.lua
-Handlers\SettingsHandler.lua
 Handlers\KeybindingHandler.lua
+Handlers\SettingsHandler.lua
 Handlers\FrameHandler.lua
+Handlers\CommandHandler.lua
 Main.lua

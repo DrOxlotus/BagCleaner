@@ -97,7 +97,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		if BagCleanerSettingsDB == nil then BagCleanerSettingsDB = {} end;
 		-- Synopsis: If the savedvars tables are nil, set them to empty.
 		
-		addonTbl.LoadSettings(true); print(addonTbl.autoDestroyItems);
+		addonTbl.LoadSettings(true);
 		-- Synopsis: When the addon is loaded, we must know what settings are 'set' to. 'true' tells the addon NOT to open the settings frame.
 	end
 end);

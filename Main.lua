@@ -1,5 +1,10 @@
+--[[
+	NOTE: Synopses pertain to the code directly above them!
+	© 2020 Oxlotus/Lightsky/Smallbuttons
+]]
+
 -- Namespace Variables
-local addonName, addonTbl = ...;
+local addon, addonTbl = ...;
 local totalSellPrice = 0;
 local itemID;
 local index;

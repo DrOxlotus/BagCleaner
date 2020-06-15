@@ -3,7 +3,16 @@
 ## Title: BagCleaner
 ## Notes: Keeps your inventory clear of junk and other unwanted items.
 ## Author: Oxlotus/Lightsky/Smallbuttons
-## SavedVariables: BagCleanerAccountItemDB
+## SavedVariables: BagCleanerAccountItemDB, BagCleanerSettingsDB
 ## SavedVariablesPerCharacter: BagCleanerCharacterItemDB
 
-Init.lua
+Locales\enUS.lua
+Locales\enGB.lua
+Locales\esES.lua
+Locales\deDE.lua
+Locales\ruRU.lua
+Handlers\CommandHandler.lua
+Handlers\SettingsHandler.lua
+Handlers\KeybindingHandler.lua
+Handlers\FrameHandler.lua
+Main.lua

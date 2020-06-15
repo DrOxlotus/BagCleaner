@@ -27,7 +27,7 @@ if LOCALE == "enUS" then -- US English
 	-- INFORMATIONAL MESSAGES
 	
 	-- KEYBINDINGS
-	L["BAGCLEANER"]								= "BAGCLEANER"; -- This is the header for the keybindings menu.
+	L["BAGCLEANER"]								= "BagCleaner"; -- This is the header for the keybindings menu.
 	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Add to Account List";
 	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Add to Character List";
 	L["BAGCLEANER_OPEN_IMPORT"]					= "Open Import";

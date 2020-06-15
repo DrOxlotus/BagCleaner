@@ -1,14 +1,14 @@
 <Bindings>
-	<Binding name="BAGCLEANER_OPEN_SETTINGS" header="BAGCLEANER" category="ADDONS">
-		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_OPEN_SETTINGS"));
-	</Binding>
-	<Binding name="BAGCLEANER_OPEN_IMPORT" category="ADDONS">
-		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_OPEN_IMPORT"));
-	</Binding>
 	<Binding name="BAGCLEANER_ADD_TO_ACCOUNT_LIST" category="ADDONS">
 		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_ADD_TO_ACCOUNT_LIST"));
 	</Binding>
 	<Binding name="BAGCLEANER_ADD_TO_CHARACTER_LIST" category="ADDONS">
 		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST"));
+	</Binding>
+	<Binding name="BAGCLEANER_OPEN_IMPORT" category="ADDONS">
+		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_OPEN_IMPORT"));
+	</Binding>
+	<Binding name="BAGCLEANER_OPEN_SETTINGS" header="BAGCLEANER" category="ADDONS">
+		BagCleanerKeyPressHandler(GetBindingKey("BAGCLEANER_OPEN_SETTINGS"));
 	</Binding>
 </Bindings>

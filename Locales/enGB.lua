@@ -26,6 +26,12 @@ if LOCALE == "enGB" then -- EU English
 	
 	-- INFORMATIONAL MESSAGES
 	
+	-- KEYBINDINGS
+	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Add to Account List";
+	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Add to Character List";
+	L["BAGCLEANER_OPEN_SETTINGS"]				= "Open Settings";
+	L["BAGCLEANER_OPEN_IMPORT"]					= "Open Import";
+	
 	-- MODE NAMES
 	L["DEBUG_MODE"] 							= "Debug";
 	L["QUIET_MODE"] 							= "Quiet";
@@ -33,8 +39,6 @@ if LOCALE == "enGB" then -- EU English
 	-- MODE DESCRIPTIONS
 	L["DEBUG_MODE_DESC"] 						= "Includes sell profits and the number of items destroyed.\n";
 	L["QUIET_MODE_DESC"] 						= "No output!\n";
-	
-	-- OBJECT TYPES
 	
 	-- OTHER
 return end;

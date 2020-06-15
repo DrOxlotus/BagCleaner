@@ -13,11 +13,6 @@ local index;
 local L = addonTbl.L;
 local numItemsDestroyed = 0;
 
--- Keybindings
-BINDING_HEADER_BAGCLEANER = "BAGCLEANER";
-BINDING_NAME_BAGCLEANER_ADD_TO_ACCOUNT_LIST = "Add to Account List";
-BINDING_NAME_BAGCLEANER_ADD_TO_CHARACTER_LIST = "Add to Character List";
-
 -- Event Registrations
 local eventFrame = CreateFrame("Frame");
 local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
@@ -73,16 +68,6 @@ local function AddItemToList(list, itemID)
 		table.remove(list, index);
 	else
 		list[#list + 1] = itemID;
-	end
-end
-
-function BagCleanerKeyPressHandler(key)
-	if key == GetBindingKey("BAGCLEANER_ADD_TO_ACCOUNT_LIST") then
-		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
-		AddItemToList(BagCleanerAccountItemDB, itemID);
-	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST") then
-		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
-		AddItemToList(BagCleanerCharacterItemDB, itemID);
 	end
 end
 

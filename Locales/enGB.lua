@@ -22,6 +22,7 @@ if LOCALE == "enGB" then -- EU English
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
 	L["ADDON_NAME_SETTINGS"] 					= "|cff00ccff" .. addon .. "|r";
+	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
 	
 	-- GLOBAL STRINGS
 	

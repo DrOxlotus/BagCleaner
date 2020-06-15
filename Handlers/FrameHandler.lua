@@ -77,6 +77,12 @@ addonTbl.OnShow = function()
 	end);
 	-- Synopsis: The above two code blocks are what show and hide the mode descriptions when a player hoves over the dropdown.
 	
+	if not bcSettingsFrame.autoDeleteButton then
+		bcSettingsFrame.autoDeleteButton = CreateFrame("CheckButton", "BagCleanerAutoDeleteButton", bcSettingsFrame, "UICheckButtonTemplate");
+		bcSettingsFrame.autoDeleteButton:SetPoint("TOPLEFT", bcSettingsFrame.modeDropDown, "BOTTOMLEFT", 20, -10);
+		bcSettingsFrame.autoDeleteButton.text:SetText(L["SETTINGS_AUTO_DELETE"]);
+	end
+	
 	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
 
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)

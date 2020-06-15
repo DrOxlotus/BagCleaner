@@ -47,7 +47,6 @@ end
 local function UpdateItemTooltip(tooltip)
 	local frame, text;
 	local _, itemLink = tooltip:GetItem();
-	
 	if itemLink then
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then

@@ -22,6 +22,7 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
 	L["ADDON_NAME_SETTINGS"] 					= "|cff00ccff" .. addon .. "|r";
+	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
 	
 	-- GLOBAL STRINGS
 	

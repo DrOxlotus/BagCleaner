@@ -19,7 +19,7 @@ local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
 eventFrame:RegisterEvent("MERCHANT_SHOW"); -- This event fires whenever a vendor (merchant) window is displayed.
 eventFrame:RegisterEvent("PLAYER_LOGIN"); -- This event fires whenever a player logs in or reloads the interface.
 
-addonTbl.addonTbl.Contains = function(list, itemID)
+addonTbl.Contains = function(list, itemID)
 	for i = 1, #list do
 		if list[i] == itemID then
 			index = i;
@@ -37,7 +37,7 @@ addonTbl.AddItemToList = function(list, itemID)
 	end
 end
 
-addonTbl.GetItemIDFromGameTooltip(tooltip)
+addonTbl.GetItemIDFromGameTooltip = function(tooltip)
 	local _, itemLink = tooltip:GetItem();
 	if itemLink then
 		itemID = GetItemInfoInstant(itemLink);

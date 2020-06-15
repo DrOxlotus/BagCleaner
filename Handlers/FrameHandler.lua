@@ -7,8 +7,10 @@ local L = addonTbl.L;
 local bcSettingsFrame = CreateFrame("Frame", "BagCleanerSettingsFrame", UIParent, "BasicFrameTemplateWithInset");
 
 local function OnClick(self, arg1)
-	BagCleanerSettingsDB.mode = arg1; addonTbl.mode = arg1;
-	UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, arg1);
+	if arg1 == L["DEBUG_MODE"] or arg1 == L["QUIET_MODE"] then
+		BagCleanerSettingsDB.mode = arg1; addonTbl.mode = arg1;
+		UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, arg1);
+	end
 end
 -- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
 
@@ -82,6 +84,26 @@ addonTbl.OnShow = function()
 		bcSettingsFrame.autoDeleteButton:SetPoint("TOPLEFT", bcSettingsFrame.modeDropDown, "BOTTOMLEFT", 20, -10);
 		bcSettingsFrame.autoDeleteButton.text:SetText(L["SETTINGS_AUTO_DELETE"]);
 	end
+	
+	bcSettingsFrame.autoDeleteButton:SetScript("OnClick", function(self, event, arg1)
+		if self:GetChecked() then
+			addonTbl.autoDestroyItems = true;
+			BagCleanerSettingsDB.autoDestroyItems = true;
+		else
+			addonTbl.autoDestroyItems = false;
+			BagCleanerSettingsDB.autoDestroyItems = false;
+		end
+	end);
+	-- Synopsis: Tells the addon whether or not it should auto delete items as they hit the player's inventory, but only if they're on the list.
+	
+	if bcSettingsFrame.autoDestroyItems then
+		bcSettingsFrame.autoDeleteButton:SetChecked(true);
+		addonTbl.autoDestroyItems = true;
+	else
+		bcSettingsFrame.autoDeleteButton:SetChecked(false);
+		addonTbl.autoDestroyItems = false;
+	end
+	-- Synopsis: Get the state of the 'autoDestroyItems' variable, if true, check the button, otherwise, keep the button unchecked.
 	
 	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
 

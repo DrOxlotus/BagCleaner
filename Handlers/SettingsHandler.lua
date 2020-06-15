@@ -10,13 +10,18 @@ local function GetOptions(arg)
 		return addonTbl[arg];
 	else
 		if arg == "mode" then
-			BagCleanerSettingsDB[arg] = L["DEBUG_MODE"]; addonTbl.arg = BagCleanerSettingsDB.arg;
+			BagCleanerSettingsDB.arg = L["DEBUG_MODE"]; addonTbl.arg = BagCleanerSettingsDB.arg;
+			return addonTbl.arg;
+		end
+		if arg == "autoDestroyItems" then
+			BagCleanerSettingsDB.arg = false; addonTbl.arg = BagCleanerSettingsDB.arg;
 			return addonTbl.arg;
 		end
 	end
 end
 -- Synopsis: Pull in the value of the settings from the savedvar table, if unavailable, then set them to their defaults.
 -- mode: Defaults to "Debug".
+-- autoDestroyItems: Defaults to false.
 
 addonTbl.LoadSettings = function(doNotOpen)
 	if doNotOpen then

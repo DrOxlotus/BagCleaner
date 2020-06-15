@@ -17,7 +17,7 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	L["SLASH_CMD_2"] 							= "/limpiador de bolsas";
 	
 	-- ERROR MESSAGES
-	L["ERROR_MSG_NYI"]							= "Sorry, but that action is not yet implemented.";
+	L["ERROR_MSG_NYI"]							= "Lo siento, pero esa acción aún no se ha implementado.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

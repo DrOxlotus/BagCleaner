@@ -29,6 +29,14 @@ local function Contains(list, itemID)
 	return false;
 end
 
+addonTbl.AddItemToList = function(list, itemID)
+	if Contains(list, itemID) then
+		table.remove(list, index);
+	else
+		list[#list + 1] = itemID;
+	end
+end
+
 local function UpdateItemTooltip(tooltip)
 	local frame, text;
 	local _, itemLink = tooltip:GetItem();
@@ -60,14 +68,6 @@ local function GetItemIDFromGameTooltip(tooltip)
 	local _, itemLink = tooltip:GetItem();
 	if itemLink then
 		itemID = GetItemInfoInstant(itemLink);
-	end
-end
-
-local function AddItemToList(list, itemID)
-	if Contains(list, itemID) then
-		table.remove(list, index);
-	else
-		list[#list + 1] = itemID;
 	end
 end
 

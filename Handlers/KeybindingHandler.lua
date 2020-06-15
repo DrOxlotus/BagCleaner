@@ -18,9 +18,9 @@ function BagCleanerKeyPressHandler(key)
 		addonTbl.LoadSettings(false);
 	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_ACCOUNT_LIST") then
 		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
-		AddItemToList(BagCleanerAccountItemDB, itemID);
+		addonTbl.AddItemToList(BagCleanerAccountItemDB, itemID);
 	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST") then
 		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
-		AddItemToList(BagCleanerCharacterItemDB, itemID);
+		addonTbl.AddItemToList(BagCleanerCharacterItemDB, itemID);
 	end
 end

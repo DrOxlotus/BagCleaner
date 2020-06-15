@@ -115,8 +115,6 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		
 		addonTbl.LoadSettings(true);
 		-- Synopsis: When the addon is loaded, we must know what settings are 'set' to. 'true' tells the addon NOT to open the settings frame.
-		
-		print(addonTbl.mode);
 	end
 end);
 

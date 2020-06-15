@@ -40,7 +40,7 @@ end
 addonTbl.GetItemIDFromGameTooltip = function(tooltip)
 	local _, itemLink = tooltip:GetItem();
 	if itemLink then
-		itemID = GetItemInfoInstant(itemLink);
+		addonTbl.itemID = GetItemInfoInstant(itemLink);
 	end
 end
 

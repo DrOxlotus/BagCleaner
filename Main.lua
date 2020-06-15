@@ -9,6 +9,9 @@ local totalSellPrice = 0;
 local itemID;
 local index;
 
+-- Local Variables
+local L = addonTbl.L;
+
 -- Keybindings
 BINDING_HEADER_BAGCLEANER = "BAGCLEANER";
 BINDING_NAME_BAGCLEANER_ADD_TO_ACCOUNT_LIST = "Add to Account List";
@@ -38,7 +41,7 @@ local function UpdateItemTooltip(tooltip)
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then
 			if Contains(BagCleanerAccountItemDB, itemID) or Contains(BagCleanerCharacterItemDB, itemID) then
-				tooltip:AddLine("|cff00ccff" .. addonName .. "|r: " .. "This item will be sold or destroyed at the next merchant.");
+				tooltip:AddLine(L["ADDON_NAME"] .. "This item will be sold or destroyed at the next merchant.");
 				tooltip:Show();
 			end
 		end
@@ -95,7 +98,9 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 			end
 		end
 		if totalSellPrice > 0 then -- We don't want to spam the player so we need the check here.
-			print("|cff00ccff" .. addonName .. "|r: " .. GetCoinTextureString(totalSellPrice, 12)); -- Print the total profit to the main chat window.
+			if addonTbl.mode == L["DEBUG_MODE"] then
+				print("|cff00ccff" .. addonName .. "|r: " .. GetCoinTextureString(totalSellPrice, 12)); -- Print the total profit to the main chat window.
+			end
 			totalSellPrice = 0;
 		end
 	end

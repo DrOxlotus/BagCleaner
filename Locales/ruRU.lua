@@ -17,7 +17,7 @@ if LOCALE == "ruRU" then -- Russian
 	L["SLASH_CMD_2"] 							= "/багклейнер";
 	
 	-- ERROR MESSAGES
-	L["ERROR_MSG_NYI"]							= "Sorry, but that action is not yet implemented.";
+	L["ERROR_MSG_NYI"]							= "Простите, но эта акция еще не осуществлена.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
@@ -30,10 +30,10 @@ if LOCALE == "ruRU" then -- Russian
 	
 	-- KEYBINDINGS
 	L["BAGCLEANER"]								= "BagCleaner"; -- This is the header for the keybindings menu.
-	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Add to Account List";
-	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Add to Character List";
-	L["BAGCLEANER_OPEN_IMPORT"]					= "Open Import";
-	L["BAGCLEANER_OPEN_SETTINGS"]				= "Open Settings";
+	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Добавить в Cписок аккаунтов";
+	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Добавить в Cписок персонажей";
+	L["BAGCLEANER_OPEN_IMPORT"]					= "Открытый Nмпорт";
+	L["BAGCLEANER_OPEN_SETTINGS"]				= "Открытые Настройки";
 	
 	-- MODE NAMES
 	L["DEBUG_MODE"] 							= "Отладка";

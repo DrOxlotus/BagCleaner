@@ -25,6 +25,7 @@ if LOCALE == "ruRU" then -- Russian
 	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
 	
 	-- GLOBAL STRINGS
+	L["LOOT_ITEM_PUSHED_SELF"] 					= "You receive item: ";
 	
 	-- INFORMATIONAL MESSAGES
 	

@@ -25,6 +25,7 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	L["SETTINGS_AUTO_DELETE"]					= "Borrado Automático";
 	
 	-- GLOBAL STRINGS
+	L["LOOT_ITEM_PUSHED_SELF"] 					= "You receive item: ";
 	
 	-- INFORMATIONAL MESSAGES
 	

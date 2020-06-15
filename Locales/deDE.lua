@@ -25,6 +25,7 @@ if LOCALE == "deDE" then -- German
 	L["SETTINGS_AUTO_DELETE"]					= "Automatisches Löschen";
 	
 	-- GLOBAL STRINGS
+	L["LOOT_ITEM_PUSHED_SELF"] 					= "You receive item: ";
 	
 	-- INFORMATIONAL MESSAGES
 	

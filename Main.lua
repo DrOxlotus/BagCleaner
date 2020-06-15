@@ -75,6 +75,32 @@ end
 
 
 eventFrame:SetScript("OnEvent", function(self, event, ...)
+	if event == "CHAT_MSG_LOOT" then
+		if addonTbl.autoDestroyItems then
+			local text, name = ...; name = string.match(name, "(.*)-");
+			if name == UnitName("player") then
+				text = string.match(text, L["LOOT_ITEM_PUSHED_SELF"] .. "(.*).");
+				if text then
+					local itemID = GetItemInfoInstant(text);
+					if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
+						for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
+							local containerSlots = GetContainerNumSlots(i);
+							for j = 1, containerSlots do
+								local tempItemID = GetContainerItemID(i, j); print(tempItemID);
+								if tempItemID == itemID then
+									print(tempItemID);
+									PickupContainerItem(i, j);
+									DeleteCursorItem();
+									break;
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	-- Synopsis: If autoDestroyItems is enabled, then this event is used to auto destroy any item on the player's list as it hits their inventory.
 	if event == "MERCHANT_SHOW" then -- Fires whenever the vendor (merchant) window is displayed.
 		for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
 			local containerSlots = GetContainerNumSlots(i);

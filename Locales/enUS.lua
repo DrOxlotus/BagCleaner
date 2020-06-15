@@ -25,6 +25,7 @@ if LOCALE == "enUS" then -- US English
 	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
 	
 	-- GLOBAL STRINGS
+	L["LOOT_ITEM_PUSHED_SELF"] 					= "You receive item: ";
 	
 	-- INFORMATIONAL MESSAGES
 	

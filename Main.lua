@@ -10,14 +10,15 @@ local itemID;
 local index;
 
 -- Local Variables
+local eventFrame = CreateFrame("Frame");
 local L = addonTbl.L;
+local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
 local numItemsDestroyed = 0;
 
 -- Event Registrations
-local eventFrame = CreateFrame("Frame");
-local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
-eventFrame:RegisterEvent("MERCHANT_SHOW"); -- This event fires whenever a vendor (merchant) window is displayed.
-eventFrame:RegisterEvent("PLAYER_LOGIN"); -- This event fires whenever a player logs in or reloads the interface.
+for _, event in pairs(addonTbl.events) do
+	eventFrame:RegisterEvent(event);
+end
 
 addonTbl.Contains = function(list, itemID)
 	for i = 1, #list do

@@ -11,6 +11,7 @@ Locales\enGB.lua
 Locales\esES.lua
 Locales\deDE.lua
 Locales\ruRU.lua
+Handlers\EventHandler.lua
 Handlers\KeybindingHandler.lua
 Handlers\SettingsHandler.lua
 Handlers\FrameHandler.lua

@@ -11,6 +11,7 @@ local index;
 
 -- Local Variables
 local L = addonTbl.L;
+local numItemsDestroyed = 0;
 
 -- Keybindings
 BINDING_HEADER_BAGCLEANER = "BAGCLEANER";
@@ -56,6 +57,7 @@ local function SellOrDestroyItemToVendor(bag, slot, itemLink, itemCount)
 	else -- No sell price
 		PickupContainerItem(bag, slot);
 		DeleteCursorItem();
+		numItemsDestroyed = numItemsDestroyed + 1;
 	end
 end
 
@@ -99,7 +101,8 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		end
 		if totalSellPrice > 0 then -- We don't want to spam the player so we need the check here.
 			if addonTbl.mode == L["DEBUG_MODE"] then
-				print("|cff00ccff" .. addonName .. "|r: " .. GetCoinTextureString(totalSellPrice, 12)); -- Print the total profit to the main chat window.
+				print(L["ADDON_NAME"] .. GetCoinTextureString(totalSellPrice, 12)); -- Print the total profit to the main chat window.
+				print(L["ADDON_NAME"] .. numItemsDestroyed); -- Print the number of items destroyed to the main chat window.
 			end
 			totalSellPrice = 0;
 		end
@@ -108,6 +111,12 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		if BagCleanerAccountItemDB == nil then BagCleanerAccountItemDB = {} end;
 		if BagCleanerCharacterItemDB == nil then BagCleanerCharacterItemDB = {} end;
 		if BagCleanerSettingsDB == nil then BagCleanerSettingsDB = {} end;
+		-- Synopsis: If the savedvars tables are nil, set them to empty.
+		
+		addonTbl.LoadSettings(true);
+		-- Synopsis: When the addon is loaded, we must know what settings are 'set' to. 'true' tells the addon NOT to open the settings frame.
+		
+		print(addonTbl.mode);
 	end
 end);
 

@@ -4,9 +4,23 @@ local addon, addonTbl = ...;
 -- Local Variables
 local L = addonTbl.L;
 
+local function GetOptions(arg)
+	if BagCleanerSettingsDB[arg] ~= nil then
+		addonTbl[arg] = BagCleanerSettingsDB[arg];
+		return addonTbl[arg];
+	else
+		if arg == "mode" then
+			BagCleanerSettingsDB[arg] = L["DEBUG_MODE"]; addonTbl.arg = BagCleanerSettingsDB.arg;
+			return addonTbl.arg;
+		end
+	end
+end
+-- Synopsis: Pull in the value of the settings from the savedvar table, if unavailable, then set them to their defaults.
+-- mode: Defaults to "Debug".
+
 addonTbl.LoadSettings = function(doNotOpen)
 	if doNotOpen then
-		BagCleanerSettingsDB = {mode = addonTbl.GetOptions("mode")};
+		BagCleanerSettingsDB = {mode = GetOptions("mode")};
 	else
 		if addonTbl.isSettingsFrameShown then
 			addonTbl.OnClose();

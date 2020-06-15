@@ -4,19 +4,16 @@ local addon, addonTbl = ...;
 -- Local Variables
 local L = addonTbl.L;
 
-local function GetOptions(arg)
-	if BagCleanerSettingsDB.arg ~= nil then
-		addonTbl.arg = BagCleanerSettingsDB.arg;
-		return addonTbl.arg;
+local function GetSettingValue(setting)
+	if BagCleanerSettingsDB[setting] == nil then
+		if setting == "autoDestroyItems" then
+			BagCleanerSettingsDB[setting] = false; addonTbl[setting] = false; return BagCleanerSettingsDB[setting];
+		end
+		if setting == "mode" then
+			BagCleanerSettingsDB[setting] = L["DEBUG_MODE"]; addonTbl[setting] = false; return BagCleanerSettingsDB[setting];
+		end
 	else
-		if arg == "mode" then
-			BagCleanerSettingsDB.arg = L["DEBUG_MODE"]; addonTbl.arg = BagCleanerSettingsDB.arg;
-			return addonTbl.arg;
-		end
-		if arg == "autoDestroyItems" then
-			BagCleanerSettingsDB.arg = false; addonTbl.arg = BagCleanerSettingsDB.arg;
-			return addonTbl.arg;
-		end
+		addonTbl[setting] = BagCleanerSettingsDB[setting]; return BagCleanerSettingsDB[setting];
 	end
 end
 -- Synopsis: Pull in the value of the settings from the savedvar table, if unavailable, then set them to their defaults.
@@ -25,7 +22,7 @@ end
 
 addonTbl.LoadSettings = function(doNotOpen)
 	if doNotOpen then
-		BagCleanerSettingsDB = {mode = GetOptions("mode"), autoDestroyItems = GetOptions("autoDestroyItems")};
+		BagCleanerSettingsDB = {mode = GetSettingValue("mode"), autoDestroyItems = GetSettingValue("autoDestroyItems")};
 	else
 		if addonTbl.isSettingsFrameShown then
 			addonTbl.OnClose();

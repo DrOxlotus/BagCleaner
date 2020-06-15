@@ -17,10 +17,10 @@ function BagCleanerKeyPressHandler(key)
 	elseif key == GetBindingKey("BAGCLEANER_OPEN_SETTINGS") then
 		addonTbl.LoadSettings(false);
 	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_ACCOUNT_LIST") then
-		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
+		GameTooltip:HookScript("OnTooltipSetItem", addonTbl.GetItemIDFromGameTooltip);
 		addonTbl.AddItemToList(BagCleanerAccountItemDB, itemID);
 	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST") then
-		GameTooltip:HookScript("OnTooltipSetItem", GetItemIDFromGameTooltip);
+		GameTooltip:HookScript("OnTooltipSetItem", addonTbl.GetItemIDFromGameTooltip);
 		addonTbl.AddItemToList(BagCleanerCharacterItemDB, itemID);
 	end
 end

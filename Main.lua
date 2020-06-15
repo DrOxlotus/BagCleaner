@@ -19,7 +19,7 @@ local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
 eventFrame:RegisterEvent("MERCHANT_SHOW"); -- This event fires whenever a vendor (merchant) window is displayed.
 eventFrame:RegisterEvent("PLAYER_LOGIN"); -- This event fires whenever a player logs in or reloads the interface.
 
-local function Contains(list, itemID)
+addonTbl.addonTbl.Contains = function(list, itemID)
 	for i = 1, #list do
 		if list[i] == itemID then
 			index = i;
@@ -30,10 +30,17 @@ local function Contains(list, itemID)
 end
 
 addonTbl.AddItemToList = function(list, itemID)
-	if Contains(list, itemID) then
+	if addonTbl.Contains(list, itemID) then
 		table.remove(list, index);
 	else
 		list[#list + 1] = itemID;
+	end
+end
+
+addonTbl.GetItemIDFromGameTooltip(tooltip)
+	local _, itemLink = tooltip:GetItem();
+	if itemLink then
+		itemID = GetItemInfoInstant(itemLink);
 	end
 end
 
@@ -44,7 +51,7 @@ local function UpdateItemTooltip(tooltip)
 	if itemLink then
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then
-			if Contains(BagCleanerAccountItemDB, itemID) or Contains(BagCleanerCharacterItemDB, itemID) then
+			if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
 				tooltip:AddLine(L["ADDON_NAME"] .. "This item will be sold or destroyed at the next merchant.");
 				tooltip:Show();
 			end
@@ -64,12 +71,7 @@ local function SellOrDestroyItemToVendor(bag, slot, itemLink, itemCount)
 	end
 end
 
-local function GetItemIDFromGameTooltip(tooltip)
-	local _, itemLink = tooltip:GetItem();
-	if itemLink then
-		itemID = GetItemInfoInstant(itemLink);
-	end
-end
+
 
 eventFrame:SetScript("OnEvent", function(self, event, ...)
 	if event == "MERCHANT_SHOW" then -- Fires whenever the vendor (merchant) window is displayed.
@@ -79,7 +81,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 				local _, itemCount, _, itemQuality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(i, j); -- Retrieves the amount, item quality (rare, epic, etc), and item link of each item in every slot of each container.
 				if itemQuality == 0 then -- The item is of Poor (grey) quality.
 					SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
-				elseif Contains(BagCleanerAccountItemDB, itemID) or Contains(BagCleanerCharacterItemDB, itemID) then
+				elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
 					SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
 				end
 			end

@@ -5,9 +5,9 @@ local addon, addonTbl = ...;
 local L = addonTbl.L;
 
 local function GetOptions(arg)
-	if BagCleanerSettingsDB[arg] ~= nil then
-		addonTbl[arg] = BagCleanerSettingsDB[arg];
-		return addonTbl[arg];
+	if BagCleanerSettingsDB.arg ~= nil then
+		addonTbl.arg = BagCleanerSettingsDB.arg;
+		return addonTbl.arg;
 	else
 		if arg == "mode" then
 			BagCleanerSettingsDB.arg = L["DEBUG_MODE"]; addonTbl.arg = BagCleanerSettingsDB.arg;
@@ -25,7 +25,7 @@ end
 
 addonTbl.LoadSettings = function(doNotOpen)
 	if doNotOpen then
-		BagCleanerSettingsDB = {mode = GetOptions("mode")};
+		BagCleanerSettingsDB = {mode = GetOptions("mode"), autoDestroyItems = GetOptions("autoDestroyItems")};
 	else
 		if addonTbl.isSettingsFrameShown then
 			addonTbl.OnClose();

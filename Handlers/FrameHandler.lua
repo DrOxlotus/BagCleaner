@@ -7,10 +7,8 @@ local L = addonTbl.L;
 local bcSettingsFrame = CreateFrame("Frame", "BagCleanerSettingsFrame", UIParent, "BasicFrameTemplateWithInset");
 
 local function OnClick(self, arg1)
-	if arg1 == L["DEBUG_MODE"] or arg1 == L["QUIET_MODE"] then
-		BagCleanerSettingsDB.mode = arg1; addonTbl.mode = arg1;
-		UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, arg1);
-	end
+	BagCleanerSettingsDB.mode = arg1; addonTbl.mode = arg1;
+	UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, arg1);
 end
 -- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
 
@@ -88,7 +86,7 @@ addonTbl.OnShow = function()
 		end
 	end);
 	-- Synopsis: Tells the addon whether or not it should auto delete items as they hit the player's inventory, but only if they're on the list.
-	if bcSettingsFrame.autoDestroyItems then
+	if BagCleanerSettingsDB.autoDestroyItems then
 		bcSettingsFrame.autoDeleteButton:SetChecked(true);
 		addonTbl.autoDestroyItems = true;
 	else

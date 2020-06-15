@@ -17,6 +17,7 @@ if LOCALE == "enGB" then -- EU English
 	L["SLASH_CMD_2"] 							= "/bagcleaner";
 	
 	-- ERROR MESSAGES
+	L["ERROR_MSG_NYI"]							= "Sorry, but that action is not yet implemented.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

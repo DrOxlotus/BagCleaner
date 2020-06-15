@@ -17,6 +17,7 @@ if LOCALE == "deDE" then -- German
 	L["SLASH_CMD_2"] 							= "/beutelreiniger";
 	
 	-- ERROR MESSAGES
+	L["ERROR_MSG_NYI"]							= "Sorry, but that action is not yet implemented.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

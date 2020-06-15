@@ -19,7 +19,7 @@ function BagCleanerKeyPressHandler(key)
 		GameTooltip:HookScript("OnTooltipSetItem", addonTbl.GetItemIDFromGameTooltip);
 		addonTbl.AddItemToList(BagCleanerCharacterItemDB, addonTbl.itemID);
 	elseif key == GetBindingKey("BAGCLEANER_OPEN_IMPORT") then
-		-- do something
+		print(L["ADDON_NAME"] .. L["ERROR_MSG_NYI"]);
 	elseif key == GetBindingKey("BAGCLEANER_OPEN_SETTINGS") then
 		addonTbl.LoadSettings(false);
 	end

@@ -22,7 +22,7 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
 	L["ADDON_NAME_SETTINGS"] 					= "|cff00ccff" .. addon .. "|r";
-	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
+	L["SETTINGS_AUTO_DELETE"]					= "Borrado Automático";
 	
 	-- GLOBAL STRINGS
 	
@@ -30,10 +30,10 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	
 	-- KEYBINDINGS
 	L["BAGCLEANER"]								= "BagCleaner"; -- This is the header for the keybindings menu.
-	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Add to Account List";
-	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Add to Character List";
-	L["BAGCLEANER_OPEN_IMPORT"]					= "Open Import";
-	L["BAGCLEANER_OPEN_SETTINGS"]				= "Open Settings";
+	L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"]			= "Añadir a la lista principal";
+	L["BAGCLEANER_ADD_TO_CHARACTER_LIST"]		= "Añadir a la lista de personajes";
+	L["BAGCLEANER_OPEN_IMPORT"]					= "Importación abierta";
+	L["BAGCLEANER_OPEN_SETTINGS"]				= "Abrir Configuración";
 	
 	-- MODE NAMES
 	L["DEBUG_MODE"] 							= "Debug";

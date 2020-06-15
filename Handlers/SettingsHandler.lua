@@ -8,7 +8,7 @@ addonTbl.LoadSettings = function(doNotOpen)
 	if doNotOpen then
 		BagCleanerSettingsDB = {mode = addonTbl.GetOptions("mode")};
 	else
-		if areOptionsOpen then
+		if addonTbl.isSettingsFrameShown then
 			addonTbl.OnClose();
 		else
 			addonTbl.OnShow();

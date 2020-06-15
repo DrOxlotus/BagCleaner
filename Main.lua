@@ -81,8 +81,8 @@ function BagCleanerKeyPressHandler(key)
 	end
 end
 
-eventFrame:SetScript("OnEvent", function(self, e, ...)
-	if e == "MERCHANT_SHOW" then -- Fires whenever the vendor (merchant) window is displayed.
+eventFrame:SetScript("OnEvent", function(self, event, ...)
+	if event == "MERCHANT_SHOW" then -- Fires whenever the vendor (merchant) window is displayed.
 		for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
 			local containerSlots = GetContainerNumSlots(i);
 			for j = 1, containerSlots do
@@ -99,13 +99,10 @@ eventFrame:SetScript("OnEvent", function(self, e, ...)
 			totalSellPrice = 0;
 		end
 	end
-	if e == "PLAYER_LOGIN" then
-		if BagCleanerAccountItemDB == nil then
-			BagCleanerAccountItemDB = {};
-		end
-		if BagCleanerCharacterItemDB == nil then
-			BagCleanerCharacterItemDB = {};
-		end
+	if event == "PLAYER_LOGIN" then
+		if BagCleanerAccountItemDB == nil then BagCleanerAccountItemDB = {} end;
+		if BagCleanerCharacterItemDB == nil then BagCleanerCharacterItemDB = {} end;
+		if BagCleanerSettingsDB == nil then BagCleanerSettingsDB = {} end;
 	end
 end);
 

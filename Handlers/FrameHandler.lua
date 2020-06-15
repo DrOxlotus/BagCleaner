@@ -3,13 +3,12 @@ local addon, addonTbl = ...;
 
 -- Local Variables
 local L = addonTbl.L;
-local isSettingsFrameShown;
 
 local bcSettingsFrame = CreateFrame("Frame", "BagCleanerSettingsFrame", UIParent, "BasicFrameTemplateWithInset");
 
 addonTbl.OnClose = function()
 	bcSettingsFrame:Hide();
-	isSettingsFrameShown = false;
+	addonTbl.isSettingsFrameShown = false;
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 end
 -- Synopsis: Hide the frame when the player closes it.
@@ -21,7 +20,7 @@ addonTbl.OnShow = function()
 		bcSettingsFrame:RegisterForDrag("LeftButton");
 		bcSettingsFrame:SetScript("OnDragStart", bcSettingsFrame.StartMoving);
 		bcSettingsFrame:SetScript("OnDragStop", bcSettingsFrame.StopMovingOrSizing);
-		bcSettingsFrame:SetSize(400, 200);
+		bcSettingsFrame:SetSize(300, 200);
 		bcSettingsFrame:ClearAllPoints();
 		bcSettingsFrame:SetPoint("CENTER", WorldFrame, "CENTER");
 	end
@@ -37,7 +36,7 @@ addonTbl.OnShow = function()
 	
 	if not bcSettingsFrame.modeDropDown then
 		bcSettingsFrame.modeDropDown = CreateFrame("Frame", "BagCleanerModeDropDown", bcSettingsFrame, "UIDropDownMenuTemplate");
-		bcSettingsFrame.modeDropDown:SetPoint("CENTER", bcSettingsFrame, "CENTER", 0, -10);
+		bcSettingsFrame.modeDropDown:SetPoint("CENTER", bcSettingsFrame.title, "LEFT", -20, -40);
 		bcSettingsFrame.modeDropDown:SetSize(175, 30);
 		bcSettingsFrame.modeDropDown.initialize = function(self, level)
 			modeList = UIDropDownMenu_CreateInfo();
@@ -71,6 +70,8 @@ addonTbl.OnShow = function()
 		GameTooltip:Hide();
 	end);
 	-- Synopsis: The above two code blocks are what show and hide the mode descriptions when a player hoves over the dropdown.
+	
+	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
 
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
 		addonTbl.OnClose();

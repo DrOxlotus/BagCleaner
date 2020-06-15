@@ -33,7 +33,6 @@ addonTbl.OnShow = function()
 		bcSettingsFrame:SetPoint("CENTER", WorldFrame, "CENTER");
 	end
 	-- Synopsis: Builds the frame itself and allows it to be draggable.
-	
 	if not bcSettingsFrame.title then
 		bcSettingsFrame.title = bcSettingsFrame:CreateFontString(nil, "OVERLAY");
 		bcSettingsFrame.title:SetFontObject("GameFontHighlight");
@@ -41,7 +40,6 @@ addonTbl.OnShow = function()
 		bcSettingsFrame.title:SetText(L["ADDON_NAME_SETTINGS"]);
 	end
 	-- Synopsis: Adds a title to the top of the frame, consisting of the addon's name.
-	
 	if not bcSettingsFrame.modeDropDown then
 		bcSettingsFrame.modeDropDown = CreateFrame("Frame", "BagCleanerModeDropDown", bcSettingsFrame, "UIDropDownMenuTemplate");
 		bcSettingsFrame.modeDropDown:SetPoint("CENTER", bcSettingsFrame.title, "LEFT", -20, -40);
@@ -61,30 +59,25 @@ addonTbl.OnShow = function()
 		end
 	end
 	-- Synopsis: These are the mode menu options.
-
 	if BagCleanerSettingsDB.mode then
 		UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, BagCleanerSettingsDB.mode);
 	end
 	-- Synopsis: Sets the value of the mode dropdown to whatever the settings cache holds for that value.
-	
 	bcSettingsFrame.modeDropDown:SetScript("OnEnter", function(self)
 		GameTooltip_SetDefaultAnchor(GameTooltip, UIParent);
 		GameTooltip:SetText("|cffffffff" .. L["DEBUG_MODE"] .. "|r: " .. L["DEBUG_MODE_DESC"] .. 
 		"|cffffffff" .. L["QUIET_MODE"] .. "|r: " .. L["QUIET_MODE_DESC"]);
 		GameTooltip:Show();
 	end);
-	
 	bcSettingsFrame.modeDropDown:SetScript("OnLeave", function(self)
 		GameTooltip:Hide();
 	end);
 	-- Synopsis: The above two code blocks are what show and hide the mode descriptions when a player hoves over the dropdown.
-	
 	if not bcSettingsFrame.autoDeleteButton then
 		bcSettingsFrame.autoDeleteButton = CreateFrame("CheckButton", "BagCleanerAutoDeleteButton", bcSettingsFrame, "UICheckButtonTemplate");
 		bcSettingsFrame.autoDeleteButton:SetPoint("TOPLEFT", bcSettingsFrame.modeDropDown, "BOTTOMLEFT", 20, -10);
 		bcSettingsFrame.autoDeleteButton.text:SetText(L["SETTINGS_AUTO_DELETE"]);
 	end
-	
 	bcSettingsFrame.autoDeleteButton:SetScript("OnClick", function(self, event, arg1)
 		if self:GetChecked() then
 			addonTbl.autoDestroyItems = true;
@@ -95,7 +88,6 @@ addonTbl.OnShow = function()
 		end
 	end);
 	-- Synopsis: Tells the addon whether or not it should auto delete items as they hit the player's inventory, but only if they're on the list.
-	
 	if bcSettingsFrame.autoDestroyItems then
 		bcSettingsFrame.autoDeleteButton:SetChecked(true);
 		addonTbl.autoDestroyItems = true;
@@ -104,15 +96,12 @@ addonTbl.OnShow = function()
 		addonTbl.autoDestroyItems = false;
 	end
 	-- Synopsis: Get the state of the 'autoDestroyItems' variable, if true, check the button, otherwise, keep the button unchecked.
-	
 	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
-
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
 		addonTbl.OnClose();
 	end);
 	-- Synopsis: If the player clicks the red X in the upper right corner of the frame, then call the SettingsMenu_OnClose()
 	-- function so the frame can be properly hidden.
-	
 	bcSettingsFrame:Show(); bcSettingsFrame:Show(); -- TODO: Test if the second Show() function call is necessary.
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 end

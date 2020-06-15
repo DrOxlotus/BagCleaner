@@ -6,6 +6,12 @@ local L = addonTbl.L;
 
 local bcSettingsFrame = CreateFrame("Frame", "BagCleanerSettingsFrame", UIParent, "BasicFrameTemplateWithInset");
 
+local function OnClick(self, arg1)
+	BagCleanerSettingsDB.mode = arg1; addonTbl.mode = arg1;
+	UIDropDownMenu_SetText(bcSettingsFrame.modeDropDown, arg1);
+end
+-- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
+
 addonTbl.OnClose = function()
 	bcSettingsFrame:Hide();
 	addonTbl.isSettingsFrameShown = false;
@@ -42,12 +48,12 @@ addonTbl.OnShow = function()
 			modeList = UIDropDownMenu_CreateInfo();
 
 			modeList.text = L["DEBUG_MODE"];
-			modeList.func = ModeDropDownMenu_OnClick;
+			modeList.func = OnClick;
 			modeList.arg1 = L["DEBUG_MODE"];
 			UIDropDownMenu_AddButton(modeList, level);
 
 			modeList.text = L["QUIET_MODE"];
-			modeList.func = ModeDropDownMenu_OnClick;
+			modeList.func = OnClick;
 			modeList.arg1 = L["QUIET_MODE"];
 			UIDropDownMenu_AddButton(modeList, level);
 		end

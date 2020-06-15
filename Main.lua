@@ -99,12 +99,9 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
-		if totalSellPrice > 0 then -- We don't want to spam the player so we need the check here.
-			if addonTbl.mode == L["DEBUG_MODE"] then
-				print(L["ADDON_NAME"] .. GetCoinTextureString(totalSellPrice, 12)); -- Print the total profit to the main chat window.
-				print(L["ADDON_NAME"] .. numItemsDestroyed); -- Print the number of items destroyed to the main chat window.
-			end
-			totalSellPrice = 0;
+		if addonTbl.mode == L["DEBUG_MODE"] then
+			if numItemsDestroyed > 0 then print(L["ADDON_NAME"] .. numItemsDestroyed) end; -- Print the number of items destroyed to the main chat window.
+			if totalSellPrice > 0 then print(L["ADDON_NAME"] .. GetCoinTextureString(totalSellPrice, 12)); totalSellPrice = 0; end; -- Print the total profit to the main chat window and reset the total sell price.
 		end
 	end
 	if event == "PLAYER_LOGIN" then

@@ -144,7 +144,7 @@ addonTbl.OnShow = function(frame)
 			bcImportScrollFrame:SetPoint("BOTTOM", BagCleanerImportEditBoxButton, "TOP", 0, 0);
 			
 			BagCleanerImportEditBoxButton:SetScript("OnClick", function(self)
-				print("Hello world!");
+				print(BagCleanerImportEditBoxEditBox:GetText());
 				BagCleanerImportEditBox:Hide();
 			end);
 

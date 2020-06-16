@@ -19,7 +19,7 @@ addonTbl.OnClose = function()
 end
 -- Synopsis: Hide the frame when the player closes it.
 
-addonTbl.OnShow = function()
+addonTbl.OnShow = function(frame)
 	if bcSettingsFrame then
 		bcSettingsFrame:SetMovable(true);
 		bcSettingsFrame:EnableMouse(true);
@@ -30,14 +30,14 @@ addonTbl.OnShow = function()
 		bcSettingsFrame:ClearAllPoints();
 		bcSettingsFrame:SetPoint("CENTER", WorldFrame, "CENTER");
 	end
-	-- Synopsis: Builds the frame itself and allows it to be draggable.
+	-- Synopsis: Builds the bcSettingsFrame itself and allows it to be draggable.
 	if not bcSettingsFrame.title then
 		bcSettingsFrame.title = bcSettingsFrame:CreateFontString(nil, "OVERLAY");
 		bcSettingsFrame.title:SetFontObject("GameFontHighlight");
 		bcSettingsFrame.title:SetPoint("CENTER", bcSettingsFrame.TitleBg, "CENTER", 5, 0);
 		bcSettingsFrame.title:SetText(L["ADDON_NAME_SETTINGS"]);
 	end
-	-- Synopsis: Adds a title to the top of the frame, consisting of the addon's name.
+	-- Synopsis: Adds a title to the top of the bcSettingsFrame, consisting of the addon's name.
 	if not bcSettingsFrame.modeDropDown then
 		bcSettingsFrame.modeDropDown = CreateFrame("Frame", "BagCleanerModeDropDown", bcSettingsFrame, "UIDropDownMenuTemplate");
 		bcSettingsFrame.modeDropDown:SetPoint("CENTER", bcSettingsFrame.title, "LEFT", -20, -40);
@@ -100,8 +100,6 @@ addonTbl.OnShow = function()
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
 		addonTbl.OnClose();
 	end);
-	-- Synopsis: If the player clicks the red X in the upper right corner of the frame, then call the SettingsMenu_OnClose()
-	-- function so the frame can be properly hidden.
 	bcSettingsFrame:Show(); bcSettingsFrame:Show(); -- TODO: Test if the second Show() function call is necessary.
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 end

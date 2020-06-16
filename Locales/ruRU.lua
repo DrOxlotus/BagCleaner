@@ -22,10 +22,10 @@ if LOCALE == "ruRU" then -- Russian
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";
 	L["ADDON_NAME_SETTINGS"] 					= "|cff00ccff" .. addon .. "|r";
-	L["SETTINGS_AUTO_DELETE"]					= "Auto Delete";
+	L["SETTINGS_AUTO_DELETE"]					= "Автоматическое удаление";
 	
 	-- GLOBAL STRINGS
-	L["LOOT_ITEM_PUSHED_SELF"] 					= "You receive item: ";
+	L["LOOT_ITEM_PUSHED_SELF"] 					= "Вы получаете предмет: ";
 	
 	-- INFORMATIONAL MESSAGES
 	

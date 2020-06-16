@@ -145,7 +145,7 @@ addonTbl.OnShow = function(frame)
 			
 			BagCleanerImportEditBoxButton:SetScript("OnClick", function(self)
 				if BagCleanerImportEditBoxEditBox:GetText() and BagCleanerImportEditBoxEditBox:GetText() ~= "" then
-					print(BagCleanerImportEditBoxEditBox:GetText());
+					addonTbl.Split(BagCleanerImportEditBoxEditBox:GetText());
 				end
 				BagCleanerImportEditBox:Hide();
 			end);

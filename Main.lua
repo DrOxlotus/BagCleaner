@@ -47,6 +47,14 @@ addonTbl.GetItemIDFromGameTooltip = function(tooltip)
 	end
 end
 
+addonTbl.Split = function(itemIDs)
+	for itemID in string.gmatch(itemIDs, '([^,]+)') do
+		itemID = tonumber(itemID);
+		addonTbl.AddItemToList(BagCleanerAccountItemDB, itemID);
+	end
+end
+-- Synopsis: Takes a comma-delimited string of itemIDs from the player, splits it into individual strings, converts the individual strings into numbers, and then adds them to the account list.
+
 local function UpdateItemTooltip(tooltip)
 	local frame, text;
 	local _, itemLink = tooltip:GetItem();

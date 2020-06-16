@@ -8,6 +8,7 @@ local events = {
 	"CHAT_MSG_LOOT",
 	"MERCHANT_SHOW",
 	"PLAYER_LOGIN",
+	"UI_ERROR_MESSAGE",
 };
 
 addonTbl.events = events;

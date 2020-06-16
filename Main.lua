@@ -5,11 +5,9 @@
 
 -- Namespace Variables
 local addon, addonTbl = ...;
-local totalSellPrice = 0;
 local index;
 
 -- Local Variables
-local earlyBreak;
 local eventFrame = CreateFrame("Frame");
 local itemID;
 local L = addonTbl.L;
@@ -17,6 +15,7 @@ local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
 local numItemsDestroyed = 0;
 local numItemsSold = 0;
 local tempItemID = 0;
+local totalSellPrice = 0;
 
 -- Event Registrations
 for _, event in pairs(addonTbl.events) do
@@ -95,7 +94,6 @@ end
 eventFrame:SetScript("OnEvent", function(self, event, ...)
 	if event == "CHAT_MSG_LOOT" then
 		if addonTbl.autoDestroyItems then
-			earlyBreak = false;
 			local text, name = ...; name = string.match(name, "(.*)-");
 			if name == UnitName("player") then
 				text = string.match(text, L["LOOT_ITEM_PUSHED_SELF"] .. "(.*).");
@@ -115,23 +113,30 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 	end
 	-- Synopsis: If autoDestroyItems is enabled, then this event is used to auto destroy any item on the player's list as it hits their inventory.
 	if event == "MERCHANT_SHOW" then -- Fires whenever the vendor (merchant) window is displayed.
-		for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
-			local containerSlots = GetContainerNumSlots(i);
-			for j = 1, containerSlots do
-				if numItemsSold == 12 then break end;
-				local _, itemCount, _, itemQuality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(i, j); -- Retrieves the amount, item quality (rare, epic, etc), and item link of each item in every slot of each container.
-				if itemQuality == 0 then -- The item is of Poor (grey) quality.
-					SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
-				elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-					SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
+		local guid = UnitGUID("target");
+		local _, _, _, _, _, creatureID, _ = strsplit("-", guid);
+		for id, _ in pairs(addonTbl.vendors) do
+			if creatureID == id then return -- The target vendor doesn't sell items.
+			else
+				for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
+					local containerSlots = GetContainerNumSlots(i);
+					for j = 1, containerSlots do
+						if numItemsSold == 12 then break end;
+						local _, itemCount, _, itemQuality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(i, j); -- Retrieves the amount, item quality (rare, epic, etc), and item link of each item in every slot of each container.
+						if itemQuality == 0 then -- The item is of Poor (grey) quality.
+							SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
+						elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
+							SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
+						end
+					end
+					if numItemsSold == 12 then break end;
+				end
+				if addonTbl.mode == L["DEBUG_MODE"] then
+					if numItemsDestroyed > 0 then print(L["ADDON_NAME"] .. numItemsDestroyed) end; -- Print the number of items destroyed to the main chat window.
+					if totalSellPrice > 0 then print(L["ADDON_NAME"] .. GetCoinTextureString(totalSellPrice, 12)); totalSellPrice = 0; end; -- Print the total profit to the main chat window and reset the total sell price.
+					numItemsSold = 0; -- Reset the number of items sold to 0 so more items can be sold, but give the player a chance to buyback items.
 				end
 			end
-			if numItemsSold == 12 then break end;
-		end
-		if addonTbl.mode == L["DEBUG_MODE"] then
-			if numItemsDestroyed > 0 then print(L["ADDON_NAME"] .. numItemsDestroyed) end; -- Print the number of items destroyed to the main chat window.
-			if totalSellPrice > 0 then print(L["ADDON_NAME"] .. GetCoinTextureString(totalSellPrice, 12)); totalSellPrice = 0; end; -- Print the total profit to the main chat window and reset the total sell price.
-			numItemsSold = 0; -- Reset the number of items sold to 0 so more items can be sold, but give the player a chance to buyback items.
 		end
 	end
 	if event == "PLAYER_LOGIN" then

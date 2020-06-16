@@ -18,6 +18,7 @@ if LOCALE == "enGB" then -- EU English
 	
 	-- ERROR MESSAGES
 	L["ERROR_MSG_NYI"]							= "Sorry, but that action is not yet implemented.";
+	L["ERROR_MSG_VENDOR_DOESNT_BUY"]			= "You cannot sell items to this merchant";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

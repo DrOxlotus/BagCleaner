@@ -18,6 +18,7 @@ if LOCALE == "esES" or LOCALE == "esMX" then -- Spanish (Mexico/Spain)
 	
 	-- ERROR MESSAGES
 	L["ERROR_MSG_NYI"]							= "Lo siento, pero esa acción aún no se ha implementado.";
+	L["ERROR_MSG_VENDOR_DOESNT_BUY"]			= "No puedes venderle objetos a este mercader";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

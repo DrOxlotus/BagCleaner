@@ -18,6 +18,7 @@ if LOCALE == "ruRU" then -- Russian
 	
 	-- ERROR MESSAGES
 	L["ERROR_MSG_NYI"]							= "Простите, но эта акция еще не осуществлена.";
+	L["ERROR_MSG_VENDOR_DOESNT_BUY"]			= "Вы не можете продавать предметы этому торговцу.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

@@ -18,6 +18,7 @@ if LOCALE == "deDE" then -- German
 	
 	-- ERROR MESSAGES
 	L["ERROR_MSG_NYI"]							= "Tut mir leid, aber dieser Befehl wurde noch nicht umgesetzt.";
+	L["ERROR_MSG_VENDOR_DOESNT_BUY"]			= "Ihr könnt diesem Händler keine Gegenstände verkaufen.";
 	
 	-- GENERAL
 	L["ADDON_NAME"] 							= "|cff00ccff" .. addon .. "|r: ";

@@ -5,9 +5,7 @@ local addon, addonTbl = ...;
 local L = addonTbl.L;
 
 local events = {
-	"BAG_UPDATE",
 	"CHAT_MSG_LOOT",
-	"ITEM_PUSH",
 	"MERCHANT_SHOW",
 	"PLAYER_LOGIN",
 };

@@ -142,6 +142,11 @@ addonTbl.OnShow = function(frame)
 			bcImportScrollFrame:SetPoint("RIGHT", -32, 0);
 			bcImportScrollFrame:SetPoint("TOP", 0, -16);
 			bcImportScrollFrame:SetPoint("BOTTOM", BagCleanerImportEditBoxButton, "TOP", 0, 0);
+			
+			BagCleanerImportEditBoxButton:SetScript("OnClick", function(self)
+				print("Hello world!");
+				BagCleanerImportEditBox:Hide();
+			end);
 
 			local bcImportEditBoxEditBox = CreateFrame("EditBox", "BagCleanerImportEditBoxEditBox", BagCleanerImportScrollFrame);
 			bcImportEditBoxEditBox:SetSize(bcImportScrollFrame:GetSize());
@@ -173,6 +178,11 @@ addonTbl.OnShow = function(frame)
 				self:GetHighlightTexture():Show();
 				bcImportEditBoxEditBox:SetWidth(bcImportScrollFrame:GetWidth());
 			end)
+			BagCleanerImportEditBox:Show();
+		elseif BagCleanerImportEditBox then
+			-- Once the player clicks "Okay" the first time, the editbox is hidden.
+			-- Since the first check is only if the frame is nil, which hidden isn't nil, then the
+			-- frame can't be shown a second, third, etc. time. This fixes that.
 			BagCleanerImportEditBox:Show();
 		end
 	end);

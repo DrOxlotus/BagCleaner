@@ -116,7 +116,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		local guid = UnitGUID("target");
 		local _, _, _, _, _, creatureID, _ = strsplit("-", guid);
 		for id, _ in pairs(addonTbl.vendors) do
-			if creatureID == id then return -- The target vendor doesn't sell items.
+			if creatureID == id or GetMerchantNumItems() == 0 then return -- The target vendor doesn't sell items.
 			else
 				for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
 					local containerSlots = GetContainerNumSlots(i);

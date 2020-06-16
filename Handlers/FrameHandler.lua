@@ -115,28 +115,68 @@ addonTbl.OnShow = function(frame)
 		bcSettingsFrame.importButton:SetHighlightFontObject("GameFontHighlight");
 	end
 	bcSettingsFrame.importButton:SetScript("OnClick", function(self, event, arg1)
-		local bcImportFrame = CreateFrame("Frame", "BagCleanerImportFrame", UIParent, "BasicFrameTemplateWithInset");
-		if bcImportFrame then
-			bcImportFrame:SetFrameLevel(10);
-			bcImportFrame:SetMovable(true);
-			bcImportFrame:EnableMouse(true);
-			bcImportFrame:RegisterForDrag("LeftButton");
-			bcImportFrame:SetScript("OnDragStart", bcImportFrame.StartMoving);
-			bcImportFrame:SetScript("OnDragStop", bcImportFrame.StopMovingOrSizing);
-			bcImportFrame:SetSize(600, 400);
-			bcImportFrame:ClearAllPoints();
-			bcImportFrame:SetPoint("CENTER", WorldFrame, "CENTER");
+		if not BagCleanerImportEditBox then
+			local bcImportEditBox = CreateFrame("Frame", "BagCleanerImportEditBox", UIParent, "DialogBoxFrame")
+			bcImportEditBox:SetPoint("CENTER")
+			bcImportEditBox:SetSize(600, 500)
+			
+			bcImportEditBox:SetBackdrop({
+				bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+				edgeFile = "Interface\\PVPFrame\\UI-Character-PVP-Highlight", -- this one is neat
+				edgeSize = 16,
+				insets = { left = 8, right = 6, top = 8, bottom = 8 },
+			})
+			bcImportEditBox:SetBackdropBorderColor(0, .44, .87, 0.5) -- darkblue
+			
+			-- Movable
+			bcImportEditBox:SetMovable(true)
+			bcImportEditBox:SetClampedToScreen(true)
+			bcImportEditBox:SetScript("OnMouseDown", function(self, button)
+				if button == "LeftButton" then
+					self:StartMoving()
+				end
+			end)
+			bcImportEditBox:SetScript("OnMouseUp", bcImportEditBox.StopMovingOrSizing)
+
+			local bcImportScrollFrame = CreateFrame("ScrollFrame", "BagCleanerImportScrollFrame", BagCleanerImportEditBox, "UIPanelScrollFrameTemplate")
+			bcImportScrollFrame:SetPoint("LEFT", 16, 0)
+			bcImportScrollFrame:SetPoint("RIGHT", -32, 0)
+			bcImportScrollFrame:SetPoint("TOP", 0, -16)
+			bcImportScrollFrame:SetPoint("BOTTOM", BagCleanerImportEditBoxButton, "TOP", 0, 0)
+
+			local bcImportEditBoxEditBox = CreateFrame("EditBox", "BagCleanerImportEditBoxEditBox", BagCleanerImportScrollFrame)
+			bcImportEditBoxEditBox:SetSize(bcImportScrollFrame:GetSize())
+			bcImportEditBoxEditBox:SetMultiLine(true)
+			bcImportEditBoxEditBox:SetAutoFocus(false) -- dont automatically focus
+			bcImportEditBoxEditBox:SetFontObject("ChatFontNormal")
+			bcImportEditBoxEditBox:SetScript("OnEscapePressed", function() bcImportEditBox:Hide() end)
+			bcImportScrollFrame:SetScrollChild(bcImportEditBoxEditBox)
+
+			bcImportEditBox:SetResizable(true)
+			bcImportEditBox:SetMinResize(150, 100)
+			
+			local bcImportResizeButton = CreateFrame("Button", "BagCleanerImportResizeButton", BagCleanerImportEditBox)
+			bcImportResizeButton:SetPoint("BOTTOMRIGHT", -6, 7)
+			bcImportResizeButton:SetSize(16, 16)
+			
+			bcImportResizeButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+			bcImportResizeButton:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+			bcImportResizeButton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+			
+			bcImportResizeButton:SetScript("OnMouseDown", function(self, button)
+				if button == "LeftButton" then
+					bcImportEditBox:StartSizing("BOTTOMRIGHT")
+					self:GetHighlightTexture():Hide() -- more noticeable
+				end
+			end)
+			bcImportResizeButton:SetScript("OnMouseUp", function(self, button)
+				bcImportEditBox:StopMovingOrSizing()
+				self:GetHighlightTexture():Show()
+				bcImportEditBoxEditBox:SetWidth(bcImportScrollFrame:GetWidth())
+			end)
+			bcImportEditBox:Show()
 		end
-		-- Synopsis: Builds the bcSettingsFrame itself and allows it to be draggable.
-		if not bcImportFrame.title then
-			bcImportFrame.title = bcImportFrame:CreateFontString(nil, "OVERLAY");
-			bcImportFrame.title:SetFontObject("GameFontHighlight");
-			bcImportFrame.title:SetPoint("CENTER", bcImportFrame.TitleBg, "CENTER", 5, 0);
-			bcImportFrame.title:SetText(L["ADDON_NAME_SETTINGS"]);
-		end
-		bcImportFrame.CloseButton:SetScript("OnClick", function(self)
-			addonTbl.CloseFrame(self:GetParent());
-		end);
+		KethoEditBox:Show()
 	end);
 	bcSettingsFrame:Show(); bcSettingsFrame:Show(); -- TODO: Test if the second Show() function call is necessary.
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);

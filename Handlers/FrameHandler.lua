@@ -12,6 +12,11 @@ local function OnClick(self, arg1)
 end
 -- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
 
+addonTbl.CloseFrame = function(self)
+	self:Hide();
+	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
+end
+
 addonTbl.OnClose = function()
 	bcSettingsFrame:Hide();
 	addonTbl.isSettingsFrameShown = false;
@@ -21,6 +26,7 @@ end
 
 addonTbl.OnShow = function(frame)
 	if bcSettingsFrame then
+		bcSettingsFrame:SetFrameLevel(1);
 		bcSettingsFrame:SetMovable(true);
 		bcSettingsFrame:EnableMouse(true);
 		bcSettingsFrame:RegisterForDrag("LeftButton");
@@ -96,6 +102,10 @@ addonTbl.OnShow = function(frame)
 		addonTbl.autoDestroyItems = false;
 	end
 	-- Synopsis: Get the state of the 'autoDestroyItems' variable, if true, check the button, otherwise, keep the button unchecked.
+	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
+	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
+		addonTbl.OnClose();
+	end);
 	if not bcSettingsFrame.importButton then
 		bcSettingsFrame.importButton = CreateFrame("Button", "BagCleanerImportButton", bcSettingsFrame, "GameMenuButtonTemplate");
 		bcSettingsFrame.importButton:SetPoint("CENTER", bcSettingsFrame, "CENTER", 0, -60);
@@ -104,9 +114,29 @@ addonTbl.OnShow = function(frame)
 		bcSettingsFrame.importButton:SetNormalFontObject("GameFontNormal");
 		bcSettingsFrame.importButton:SetHighlightFontObject("GameFontHighlight");
 	end
-	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
-	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
-		addonTbl.OnClose();
+	bcSettingsFrame.importButton:SetScript("OnClick", function(self, event, arg1)
+		local bcImportFrame = CreateFrame("Frame", "BagCleanerImportFrame", UIParent, "BasicFrameTemplateWithInset");
+		if bcImportFrame then
+			bcImportFrame:SetFrameLevel(10);
+			bcImportFrame:SetMovable(true);
+			bcImportFrame:EnableMouse(true);
+			bcImportFrame:RegisterForDrag("LeftButton");
+			bcImportFrame:SetScript("OnDragStart", bcImportFrame.StartMoving);
+			bcImportFrame:SetScript("OnDragStop", bcImportFrame.StopMovingOrSizing);
+			bcImportFrame:SetSize(600, 400);
+			bcImportFrame:ClearAllPoints();
+			bcImportFrame:SetPoint("CENTER", WorldFrame, "CENTER");
+		end
+		-- Synopsis: Builds the bcSettingsFrame itself and allows it to be draggable.
+		if not bcImportFrame.title then
+			bcImportFrame.title = bcImportFrame:CreateFontString(nil, "OVERLAY");
+			bcImportFrame.title:SetFontObject("GameFontHighlight");
+			bcImportFrame.title:SetPoint("CENTER", bcImportFrame.TitleBg, "CENTER", 5, 0);
+			bcImportFrame.title:SetText(L["ADDON_NAME_SETTINGS"]);
+		end
+		bcImportFrame.CloseButton:SetScript("OnClick", function(self)
+			addonTbl.CloseFrame(self:GetParent());
+		end);
 	end);
 	bcSettingsFrame:Show(); bcSettingsFrame:Show(); -- TODO: Test if the second Show() function call is necessary.
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);

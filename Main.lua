@@ -6,14 +6,16 @@
 -- Namespace Variables
 local addon, addonTbl = ...;
 local totalSellPrice = 0;
-local itemID;
 local index;
 
 -- Local Variables
+local earlyBreak;
 local eventFrame = CreateFrame("Frame");
+local itemID;
 local L = addonTbl.L;
 local mouseFrame = CreateFrame("Frame", "MouseFrame", UIParent);
 local numItemsDestroyed = 0;
+local tempItemID = 0;
 
 -- Event Registrations
 for _, event in pairs(addonTbl.events) do
@@ -72,27 +74,28 @@ local function SellOrDestroyItemToVendor(bag, slot, itemLink, itemCount)
 	end
 end
 
-
+local function SilentlyAutoDeleteBagItem(bag, slot)
+	if GetContainerItemID(bag, slot) == itemID then
+		PickupContainerItem(bag, slot);
+		DeleteCursorItem();
+	end
+end
+-- Synopsis: Used by the CHAT_MSG_LOOT event to automatically delete items when Auto Delete is enabled.
 
 eventFrame:SetScript("OnEvent", function(self, event, ...)
 	if event == "CHAT_MSG_LOOT" then
 		if addonTbl.autoDestroyItems then
+			earlyBreak = false;
 			local text, name = ...; name = string.match(name, "(.*)-");
 			if name == UnitName("player") then
 				text = string.match(text, L["LOOT_ITEM_PUSHED_SELF"] .. "(.*).");
 				if text then
-					local itemID = GetItemInfoInstant(text);
+					itemID = GetItemInfoInstant(text);
 					if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
 						for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
 							local containerSlots = GetContainerNumSlots(i);
-							for j = 1, containerSlots do
-								local tempItemID = GetContainerItemID(i, j); print(tempItemID);
-								if tempItemID == itemID then
-									print(tempItemID);
-									PickupContainerItem(i, j);
-									DeleteCursorItem();
-									break;
-								end
+							for j = containerSlots, 1, -1 do
+								C_Timer.After(0, function() C_Timer.After(0.3, function() SilentlyAutoDeleteBagItem(i, j) end); end);
 							end
 						end
 					end

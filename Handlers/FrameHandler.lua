@@ -12,6 +12,19 @@ local function OnClick(self, arg1)
 end
 -- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
 
+local function SetTooltip(self, text)
+	self:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+		GameTooltip:SetText(text, nil, nil, nil, nil, true);
+		GameTooltip:Show();
+	end);
+	self:SetScript("OnLeave", function(self)
+		if GameTooltip:GetOwner() == self then
+			GameTooltip:Hide();
+		end
+	end);
+end
+
 addonTbl.OnClose = function()
 	bcSettingsFrame:Hide();
 	addonTbl.isSettingsFrameShown = false;
@@ -62,13 +75,15 @@ addonTbl.OnShow = function()
 	end
 	-- Synopsis: Sets the value of the mode dropdown to whatever the settings cache holds for that value.
 	bcSettingsFrame.modeDropDown:SetScript("OnEnter", function(self)
-		GameTooltip_SetDefaultAnchor(GameTooltip, UIParent);
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
 		GameTooltip:SetText("|cffffffff" .. L["DEBUG_MODE"] .. "|r: " .. L["DEBUG_MODE_DESC"] .. 
-		"|cffffffff" .. L["QUIET_MODE"] .. "|r: " .. L["QUIET_MODE_DESC"]);
+		"|cffffffff" .. L["QUIET_MODE"] .. "|r: " .. L["QUIET_MODE_DESC"], nil, nil, nil, nil, true);
 		GameTooltip:Show();
 	end);
 	bcSettingsFrame.modeDropDown:SetScript("OnLeave", function(self)
-		GameTooltip:Hide();
+		if GameTooltip:GetOwner() == self then
+			GameTooltip:Hide();
+		end
 	end);
 	-- Synopsis: The above two code blocks are what show and hide the mode descriptions when a player hoves over the dropdown.
 	if not bcSettingsFrame.autoDeleteButton then

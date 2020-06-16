@@ -96,6 +96,14 @@ addonTbl.OnShow = function(frame)
 		addonTbl.autoDestroyItems = false;
 	end
 	-- Synopsis: Get the state of the 'autoDestroyItems' variable, if true, check the button, otherwise, keep the button unchecked.
+	if not bcSettingsFrame.importButton then
+		bcSettingsFrame.importButton = CreateFrame("Button", "BagCleanerImportButton", bcSettingsFrame, "GameMenuButtonTemplate");
+		bcSettingsFrame.importButton:SetPoint("CENTER", bcSettingsFrame, "CENTER", 0, -60);
+		bcSettingsFrame.importButton:SetSize(85, 25);
+		bcSettingsFrame.importButton:SetText(L["BAGCLEANER_OPEN_IMPORT"]);
+		bcSettingsFrame.importButton:SetNormalFontObject("GameFontNormal");
+		bcSettingsFrame.importButton:SetHighlightFontObject("GameFontHighlight");
+	end
 	addonTbl.isSettingsFrameShown = true; -- Let's the addon known that the player is actively looking at the options menu.
 	bcSettingsFrame.CloseButton:SetScript("OnClick", function(self)
 		addonTbl.OnClose();

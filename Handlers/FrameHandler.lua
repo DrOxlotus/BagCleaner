@@ -12,19 +12,6 @@ local function OnClick(self, arg1)
 end
 -- Synopsis: Changes the value of the mode dropdown to whatever the player selects.
 
-local function SetTooltip(self, text)
-	self:SetScript("OnEnter", function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-		GameTooltip:SetText(text, nil, nil, nil, nil, true);
-		GameTooltip:Show();
-	end);
-	self:SetScript("OnLeave", function(self)
-		if GameTooltip:GetOwner() == self then
-			GameTooltip:Hide();
-		end
-	end);
-end
-
 addonTbl.OnClose = function()
 	bcSettingsFrame:Hide();
 	addonTbl.isSettingsFrameShown = false;

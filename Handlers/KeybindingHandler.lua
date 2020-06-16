@@ -8,7 +8,6 @@ local L = addonTbl.L;
 BINDING_HEADER_BAGCLEANER = L["BAGCLEANER"];
 BINDING_NAME_BAGCLEANER_ADD_TO_ACCOUNT_LIST = L["BAGCLEANER_ADD_TO_ACCOUNT_LIST"];
 BINDING_NAME_BAGCLEANER_ADD_TO_CHARACTER_LIST = L["BAGCLEANER_ADD_TO_CHARACTER_LIST"];
-BINDING_NAME_BAGCLEANER_OPEN_IMPORT = L["BAGCLEANER_OPEN_IMPORT"];
 BINDING_NAME_BAGCLEANER_OPEN_SETTINGS = L["BAGCLEANER_OPEN_SETTINGS"];
 
 function BagCleanerKeyPressHandler(key)
@@ -18,8 +17,6 @@ function BagCleanerKeyPressHandler(key)
 	elseif key == GetBindingKey("BAGCLEANER_ADD_TO_CHARACTER_LIST") then
 		GameTooltip:HookScript("OnTooltipSetItem", addonTbl.GetItemIDFromGameTooltip);
 		addonTbl.AddItemToList(BagCleanerCharacterItemDB, addonTbl.itemID);
-	elseif key == GetBindingKey("BAGCLEANER_OPEN_IMPORT") then
-		print(L["ADDON_NAME"] .. L["ERROR_MSG_NYI"]);
 	elseif key == GetBindingKey("BAGCLEANER_OPEN_SETTINGS") then
 		addonTbl.LoadSettings(false);
 	end

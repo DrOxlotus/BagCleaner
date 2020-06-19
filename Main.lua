@@ -62,7 +62,7 @@ local function UpdateItemTooltip(tooltip)
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then
 			if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-				tooltip:AddLine("|TInterface\\Addons\\BagCleaner\\Assets\\sell:0|t |T");
+				tooltip:AddLine("|TInterface\\Addons\\BagCleaner\\Assets\\sell:0|t");
 				tooltip:Show();
 			end
 		end
@@ -116,18 +116,20 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 		local guid = UnitGUID("target");
 		local _, _, _, _, _, creatureID, _ = strsplit("-", guid);
 		for id, _ in pairs(addonTbl.vendors) do
-			if creatureID == id or GetMerchantNumItems() == 0 then return -- The target vendor doesn't sell items.
+			if creatureID == id or GetMerchantNumItems() == 0 then return -- The target vendor doesn't sell items or is on the blacklist.
 			else
 				for i = 0, NUM_BAG_FRAMES do -- Using a constant that is equal to 4.
 					local containerSlots = GetContainerNumSlots(i);
 					for j = 1, containerSlots do
 						if numItemsSold == 12 then break end;
 						local _, itemCount, _, itemQuality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(i, j); -- Retrieves the amount, item quality (rare, epic, etc), and item link of each item in every slot of each container.
-						local itemString = select(3, strfind(itemLink, "|H(.+)|h")); -- The item string will take into account bonus and mod IDs, which can adjust sell price.
-						if itemQuality == 0 then -- The item is of Poor (grey) quality.
-							SellOrDestroyItemToVendor(i, j, itemString, itemCount);
-						elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-							SellOrDestroyItemToVendor(i, j, itemString, itemCount);
+						if itemLink then
+							local itemString = select(3, strfind(itemLink, "|H(.+)|h")); -- The item string will take into account bonus and mod IDs, which can adjust sell price.
+							if itemQuality == 0 then -- The item is of Poor (grey) quality.
+								SellOrDestroyItemToVendor(i, j, itemString, itemCount);
+							elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
+								SellOrDestroyItemToVendor(i, j, itemString, itemCount);
+							end
 						end
 					end
 					if numItemsSold == 12 then break end;

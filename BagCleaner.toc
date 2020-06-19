@@ -1,5 +1,5 @@
 ## Interface: 80300
-## Version: 1.0
+## Version: 1.1
 ## Title: BagCleaner
 ## Notes: Keeps your inventory clear of junk and other unwanted items.
 ## Author: Oxlotus/Lightsky/Smallbuttons

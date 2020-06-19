@@ -70,8 +70,8 @@ local function UpdateItemTooltip(tooltip)
 end
 -- Icon by surang. https://www.flaticon.com/authors/surang
 
-local function SellOrDestroyItemToVendor(bag, slot, itemLink, itemCount)
-	local _, _, _, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(itemLink);
+local function SellOrDestroyItemToVendor(bag, slot, itemString, itemCount)
+	local _, _, _, _, _, _, _, _, _, _, itemSellPrice = GetItemInfo(itemString);
 	if itemSellPrice > 0 then -- The item has a sell price.
 		totalSellPrice = totalSellPrice + (itemCount * itemSellPrice); -- Continously append item sell prices to the total profit.
 		UseContainerItem(bag, slot); -- Sell the item to the merchant.
@@ -123,10 +123,11 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 					for j = 1, containerSlots do
 						if numItemsSold == 12 then break end;
 						local _, itemCount, _, itemQuality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(i, j); -- Retrieves the amount, item quality (rare, epic, etc), and item link of each item in every slot of each container.
+						local itemString = select(3, strfind(itemLink, "|H(.+)|h")); -- The item string will take into account bonus and mod IDs, which can adjust sell price.
 						if itemQuality == 0 then -- The item is of Poor (grey) quality.
-							SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
+							SellOrDestroyItemToVendor(i, j, itemString, itemCount);
 						elseif addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-							SellOrDestroyItemToVendor(i, j, itemLink, itemCount);
+							SellOrDestroyItemToVendor(i, j, itemString, itemCount);
 						end
 					end
 					if numItemsSold == 12 then break end;

@@ -62,7 +62,7 @@ local function UpdateItemTooltip(tooltip)
 		local itemID = GetItemInfoInstant(itemLink);
 		if itemID then
 			if addonTbl.Contains(BagCleanerAccountItemDB, itemID) or addonTbl.Contains(BagCleanerCharacterItemDB, itemID) then
-				tooltip:AddDoubleLine(L["ADDON_NAME"], "|TInterface\\Addons\\BagCleaner\\Assets\\sell:0|t |T", 0, 0, 0, 0, 0, 0);
+				tooltip:AddLine("|TInterface\\Addons\\BagCleaner\\Assets\\sell:0|t |T");
 				tooltip:Show();
 			end
 		end
